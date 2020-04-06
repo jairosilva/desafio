@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Palíndromos</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/product.css">
+
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item"><a class="active" href="/palindromos">Palíndromos</a></li>
+                <li class="main-header__item"><a href="/troco">Troco</a></li>
+                <li class="main-header__item"><a href="/veiculo">Veículos</a></li>
+                <li class="main-header__item"><a href="/cep">CEP</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cover" class="min-vh-100">
+            <div id="cover-caption">
+                <div class="container">
+                    <div class="row text-white">
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                            <h1 class="display-4 py-2 text-truncate">Palíndromos</h1>
+                            <div class="px-2">
+                                <form action="" class="justify-content-center">
+                                    <div class="form-group">
+                                        <label class="sr-only">Início</label>
+                                        <input type="text" class="form-control" id="inicio" value="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only">Fim</label>
+                                        <input type="text" class="form-control" id="fim" value="1000">
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary" role="button" onClick="determinaPalindromos()">Determina Palíndromos</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal" tabindex="-1" role="dialog" id="resultado">
+            <div class="modal-dialog" role="document"> 
+                <div class="modal-content">
+                    <form class="form-horizontal" id="formFuncao">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Palíndromos</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <ul id="listaNumeros"></ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+    </main>
+
+   
+    <script type="text/javascript">
+
+        function determinaPalindromos() {
+
+            parametros = { 
+                inicio:  $("#inicio").val(), 
+                fim: $("#fim").val()
+            };
+
+            $.getJSON('/determina-palindromos', parametros, function(dados) { 
+                var listaHtml = '';
+
+                for(i=0; i<dados.length; i++) {
+                    listaHtml += dados[i] + ", ";
+                }
+
+                listaHtml.substring(0, listaHtml.length - 1);
+
+                $("#listaNumeros").html(listaHtml);
+
+                $("#resultado").modal('show');
+            });
+        }
+        
+    </script>
+</body>
+
+</html>

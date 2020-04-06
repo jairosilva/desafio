@@ -1,0 +1,1 @@
+{"quantidadePortas":4,"rodas":2,"modelo":"","anoFabricacao":"","marca":""}{"quantidadePortas":4,"modelo":"","anoFabricacao":"","marca":""}{"quantidadePortas":4,"modelo":"","anoFabricacao":"","marca":""}
